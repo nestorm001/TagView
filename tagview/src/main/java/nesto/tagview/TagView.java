@@ -5,6 +5,7 @@ import android.support.annotation.ColorInt;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -38,16 +39,25 @@ public class TagView extends FrameLayout implements OnTagClickListener {
 
     public TagView(Context context) {
         super(context);
+        initView(context);
+    }
+
+    public TagView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initView(context);
+    }
+
+    private void initView(Context context) {
         this.context = context;
         View view = inflate(context, R.layout.tag_view, null);
         addView(view);
+        layoutManager = new GridLayoutManager(context, 1);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         tags = new ArrayList<>();
         adapter = new TagAdapter(context, tags);
         recyclerView.setAdapter(adapter);
         additionTotal = calculateAddition();
         initTextPaint();
-        initTagHolder();
     }
 
     private int calculateAddition() {
@@ -59,18 +69,7 @@ public class TagView extends FrameLayout implements OnTagClickListener {
         paint.setTextSize(dp2px(textSize));
     }
 
-    private void initTagHolder() {
-        recyclerView.post(() -> {
-            width = recyclerView.getMeasuredWidth() - recyclerView.getPaddingLeft()
-                    - recyclerView.getPaddingRight();
-            layoutManager = new GridLayoutManager(context, width);
-            setTagSize();
-            recyclerView.setLayoutManager(layoutManager);
-        });
-    }
-
     private void setTagSize() {
-        if (layoutManager == null) return;
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) {
                 String text = tags.get(position).tag;
@@ -154,5 +153,16 @@ public class TagView extends FrameLayout implements OnTagClickListener {
 
     @Override public void tagClicked(String item) {
         if (listener != null) listener.tagClicked(item);
+    }
+
+    @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        width = recyclerView.getMeasuredWidth() - recyclerView.getPaddingLeft()
+                - recyclerView.getPaddingRight();
+        // make sure the width is at least 1
+        width = Math.max(1, width);
+        layoutManager.setSpanCount(width);
+        setTagSize();
+        recyclerView.setLayoutManager(layoutManager);
     }
 }
