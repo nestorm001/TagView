@@ -30,7 +30,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -52,11 +52,11 @@ dependencies {
 }
 
 version = "${versionMajor}.${versionMinor}.${versionPatch}"
-group = "nesto"
+group = "cn.nesto"
 
 ext {
     PUBLISH_GROUP_ID = group
-    PUBLISH_ARTIFACT_ID = 'tapview'
+    PUBLISH_ARTIFACT_ID = 'tagview'
     PUBLISH_VERSION = "${versionMajor}.${versionMinor}.${versionPatch}"
 }
 
@@ -86,4 +86,9 @@ bintray {
         licenses = ["WTFPL"]
         publicDownloadNumbers = true
     }
+}
+
+task a(dependsOn: [clean, build, generateRelease]) {
+    build.mustRunAfter clean
+    generateRelease.mustRunAfter clean
 }
