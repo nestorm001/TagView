@@ -1,5 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+def versionMajor = 0
+def versionMinor = 1
+def versionPatch = 0
+def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 android {
     compileSdkVersion 24
@@ -8,13 +15,16 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
+        debug {
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -24,6 +34,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -35,4 +49,41 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     testCompile 'junit:junit:4.12'
+}
+
+version = "${versionMajor}.${versionMinor}.${versionPatch}"
+group = "nesto"
+
+ext {
+    PUBLISH_GROUP_ID = group
+    PUBLISH_ARTIFACT_ID = 'tapview'
+    PUBLISH_VERSION = "${versionMajor}.${versionMinor}.${versionPatch}"
+}
+
+apply from: '../release.gradle'
+
+def mavenProps = new Properties()
+mavenProps.load(new FileInputStream(rootProject.file("maven.properties")))
+def bintrayName = rootProject.file(mavenProps.name)
+def apiKey = rootProject.file(mavenProps.key)
+def gitUrl = "https://github.com/nestorm001/TagView.git"
+
+bintray {
+    user = bintrayName
+    key = apiKey
+    configurations = ['archives']
+    dryRun = true
+    publish = true
+
+    filesSpec {
+        from "build/release-v${version}.zip"
+        into '.'
+    }
+    pkg {
+        repo = "maven"
+        name = "tagview"    //发布到JCenter上的项目名字
+        vcsUrl = gitUrl
+        licenses = ["WTFPL"]
+        publicDownloadNumbers = true
+    }
 }
