@@ -35,7 +35,7 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
         inflater = LayoutInflater.from(context);
     }
 
-    public void setListener(OnTagClickListener listener) {
+    void setListener(OnTagClickListener listener) {
         this.listener = listener;
     }
 
