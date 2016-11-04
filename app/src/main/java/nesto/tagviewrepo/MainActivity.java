@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         tags.addStringTag("fffffffffffffffffffffffffff")
-                .addStringTag("iiiiiiiiiiiiiiiiiiiiiiiiiii")
                 .addStringTag("ooooooooooooooooooooooooooo")
                 .addStringTags(Arrays.asList("hello", "world"))
                 .addTag(new Tag("apple", Color.argb(0xff, 0x88, 0xff, 0xff),
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                         // do whatever you like
                     }
                 })
-                .textSize(10)
+                .textSize(12)
                 .margin(2)
                 .padding(16)
                 .corner(5)

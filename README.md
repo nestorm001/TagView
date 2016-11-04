@@ -5,7 +5,7 @@ A custom view to show tags or similar staff, which moves item to the next line w
 ## Preview
 
 <p align="center">
-    <img src="/screenshots/preview.png" alt="a simple demo use TagView" width="405" height="720">
+    <img src="/screenshots/preview_0.1.1.png" alt="a simple demo use TagView" width="405" height="720">
 </p>
 
 ## Setup and usage  
