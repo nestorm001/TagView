@@ -35,7 +35,7 @@ Add your `TagView` in layout xml or simply add it programmatically.
     TagView tagView = new TagView(context);
     theViewGroupYouWantToAddTagView.addView(tagView);
 ```
-As you get your `TagView`, set it up and add whatever tag you like. All the number you set, like textSize, margin, padding, is a dp size. You know, I'm lazzzzy, all this attributes cannot be set in xml yet.   
+As you get your `TagView`, set it up and add whatever tag you like. All the number you set, like textSize, margin, padding, is a dp size. All these settings are optional. You know, I'm lazzzzy, all this attributes cannot be set in xml yet.   
 ```Java
     tagView.textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
            .backgroundColor(Color.argb(0xff, 0x7f, 0x7f, 0x7f))
@@ -56,7 +56,7 @@ As you get your `TagView`, set it up and add whatever tag you like. All the numb
            .itemHeight(30);
 ```
 
-There are sevaral ways for you to add tags. You can simply add `String` or `String` list or add an entity called `Tag`, with tag string and color.
+There are several ways for you to add tags. You can simply add `String` or `String` list or add an entity called `Tag`, with tag string and color.
 ```Java
     tagView.addStringTags(Arrays.asList("hello", "world"));
     tagView.addStringTag("hello");
