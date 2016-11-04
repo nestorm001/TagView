@@ -70,6 +70,7 @@ or add an entity called `Tag`, with tag string and color.
 * Drag tag.
 
 ## License [![license for TagView](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png)](#)
+```
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                     Version 2, December 2004
 
@@ -83,3 +84,4 @@ or add an entity called `Tag`, with tag string and color.
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
+ ```
