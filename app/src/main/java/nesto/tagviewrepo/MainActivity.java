@@ -42,23 +42,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        tags.addStringTags(Arrays.asList("hello", "world"))
+        tags.addStringTag("fffffffffffffffffffffffffff")
+                .addStringTag("iiiiiiiiiiiiiiiiiiiiiiiiiii")
+                .addStringTag("ooooooooooooooooooooooooooo")
+                .addStringTags(Arrays.asList("hello", "world"))
                 .addTag(new Tag("apple", Color.argb(0xff, 0x88, 0xff, 0xff),
                         Color.argb(0xff, 0x77, 0x66, 0x55)))
                 .addTag(new Tag("google", Color.argb(0xff, 0x00, 0x00, 0x00),
                         Color.argb(0xff, 0x77, 0x66, 0x55)))
                 .addTag(new Tag("microsoft", Color.argb(0xff, 0x11, 0x22, 0x33),
                         Color.argb(0xff, 0xee, 0xaa, 0xcc)))
-                .backgroundColor(Color.argb(0xff, 0x88, 0xff, 0xff))
+                .backgroundColor(Color.argb(0xff, 0x7f, 0x7f, 0x7f))
                 .textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
-                .textSize(14)
+                .textSize(10)
                 .setListener(new OnTagClickListener() {
                     @Override public void tagClicked(String item) {
                         Log.d("wtf", item);
                     }
+
+                    @Override public void tagLongClicked(String item) {
+                        Log.d("wtf", item);
+                    }
                 })
                 .margin(2)
-                .padding(18);
+                .padding(16)
+                .corner(5)
+                .itemHeight(30)
+        ;
         setWatcher();
     }
 

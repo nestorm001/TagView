@@ -2,6 +2,7 @@ package nesto.tagview;
 
 import android.content.Context;
 import android.support.annotation.ColorInt;
+import android.support.annotation.IntRange;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
@@ -29,9 +30,10 @@ public class TagView extends FrameLayout implements OnTagClickListener {
     private OnTagClickListener listener;
 
     private static final int ADDITION_MARGIN = 2;
-    private static final int ADDITION_PADDING = 16; // 2 * 2dp margin + 2 * 16dp padding
+    private static final int ADDITION_PADDING = 16;
     private int padding = ADDITION_PADDING;
     private int margin = ADDITION_MARGIN;
+    // 2 * margin + 2 * padding
     private Integer additionTotal;
 
     private static final int DEFAULT_TEXT_SIZE = 12;
@@ -61,12 +63,12 @@ public class TagView extends FrameLayout implements OnTagClickListener {
     }
 
     private int calculateAddition() {
-        return dp2px(2 * margin + 2 * padding);
+        return DpTrans.dp2px(context, 2 * margin + 2 * padding);
     }
 
     private void initTextPaint() {
         paint = new TextPaint();
-        paint.setTextSize(dp2px(textSize));
+        paint.setTextSize(DpTrans.dp2px(context, textSize));
     }
 
     private void setTagSize() {
@@ -79,9 +81,9 @@ public class TagView extends FrameLayout implements OnTagClickListener {
         });
     }
 
-    public TagView textSize(int dpValue) {
+    public TagView textSize(@IntRange(from = 1) int dpValue) {
         textSize = dpValue;
-        paint.setTextSize(dp2px(textSize));
+        paint.setTextSize(DpTrans.dp2px(context, textSize));
         adapter.setTextSize(dpValue);
         setTagSize();
         return this;
@@ -97,18 +99,29 @@ public class TagView extends FrameLayout implements OnTagClickListener {
         return this;
     }
 
-    public TagView padding(int padding) {
-        this.padding = padding;
+    public TagView padding(@IntRange(from = 0) int padding) {
+        this.padding = Math.max(padding, 8);
         additionTotal = calculateAddition();
         setTagSize();
+        adapter.setPadding(DpTrans.dp2px(context, padding));
         return this;
     }
 
-    public TagView margin(int margin) {
+    public TagView margin(@IntRange(from = 0) int margin) {
         this.margin = margin;
         additionTotal = calculateAddition();
         setTagSize();
-        adapter.setMargin(dp2px(margin));
+        adapter.setMargin(DpTrans.dp2px(context, margin));
+        return this;
+    }
+
+    public TagView itemHeight(@IntRange(from = 1) int height) {
+        adapter.setHeight(DpTrans.dp2px(context, height));
+        return this;
+    }
+
+    public TagView corner(@IntRange(from = 0) int radius) {
+        adapter.setRadius(DpTrans.dp2px(context, radius));
         return this;
     }
 
@@ -146,13 +159,12 @@ public class TagView extends FrameLayout implements OnTagClickListener {
         return this;
     }
 
-    private int dp2px(float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
     @Override public void tagClicked(String item) {
         if (listener != null) listener.tagClicked(item);
+    }
+
+    @Override public void tagLongClicked(String item) {
+        if (listener != null) listener.tagLongClicked(item);
     }
 
     @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

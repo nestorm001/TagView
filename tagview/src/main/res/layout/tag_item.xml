@@ -9,13 +9,12 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_margin="2dp"
         android:background="@drawable/corner_gray_lighter"
         android:ellipsize="end"
-        android:gravity="center"
+        android:gravity="center|left"
         android:maxLines="1"
         android:textColor="#333536"
         android:textSize="12dp"
-        tools:ignore="SpUsage"/>
+        tools:ignore="RtlHardcoded,SpUsage"/>
 </LinearLayout>

@@ -3,6 +3,7 @@ package nesto.tagview;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.ColorInt;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,6 +29,10 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
     private Integer defaultTextColor;
     private Integer textSize;
     private Integer margin;
+    private Integer paddingLeft;
+    private Integer paddingRight;
+    private Integer height;
+    private Integer radius;
 
     TagAdapter(Context context, List<Tag> items) {
         this.context = context;
@@ -54,6 +59,11 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
             if (listener != null) listener.tagClicked(tag.tag);
         });
 
+        holder.textView.setOnLongClickListener(v -> {
+            if (listener != null) listener.tagLongClicked(tag.tag);
+            return true;
+        });
+
         Integer textColor = tag.textColor;
         if (textColor != null) holder.textView.setTextColor(textColor);
         else if (defaultTextColor != null) holder.textView.setTextColor(defaultTextColor);
@@ -66,11 +76,20 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
 
         if (textSize != null) holder.textView.setTextSize(textSize);
 
+
+        if (paddingLeft != null) {
+            holder.textView.setPadding(paddingLeft, 0, paddingRight, 0);
+        }
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)
+                holder.textView.getLayoutParams();
+
         if (margin != null) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)
-                    holder.textView.getLayoutParams();
             params.leftMargin = margin;
             params.rightMargin = margin;
+        }
+        if (height != null) {
+            params.height = height;
         }
     }
 
@@ -93,14 +112,36 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
         notifyDataSetChanged();
     }
 
+    // min padding left 8dp
+    // ugly thing here
+    // min padding right 6dp, a bit smaller than left to avoid a wired thing that the length of
+    // the text get from the text paint is a bit smaller than it's real length
+    void setPadding(int padding) {
+        this.paddingLeft = Math.max(DpTrans.dp2px(context, 8), padding);
+        this.paddingRight = Math.max(DpTrans.dp2px(context, 6), padding - 2);
+        notifyDataSetChanged();
+    }
+
     @SuppressWarnings("deprecation") private Drawable getBackground(@ColorInt int color) {
-        Drawable drawable = context.getResources().getDrawable(R.drawable.corner_gray_lighter);
+        GradientDrawable drawable = (GradientDrawable) context.getResources()
+                .getDrawable(R.drawable.corner_gray_lighter);
         drawable.setColorFilter(color, PorterDuff.Mode.SRC);
+        if (radius != null) drawable.setCornerRadius(radius);
         return drawable;
     }
 
     void setTextSize(int dpValue) {
         textSize = dpValue;
+        notifyDataSetChanged();
+    }
+
+    void setHeight(int height) {
+        this.height = height;
+        notifyDataSetChanged();
+    }
+
+    void setRadius(int radius) {
+        this.radius = radius;
         notifyDataSetChanged();
     }
 

@@ -7,4 +7,6 @@ package nesto.tagview;
 
 public interface OnTagClickListener {
     void tagClicked(String item);
+
+    void tagLongClicked(String item);
 }
