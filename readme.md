@@ -5,7 +5,7 @@ A custom view to show tags or similar staff, which moves item to the next line w
 ## Preview
 
 <p align="center">
-    <img src="/screenshots/preview.png" alt="a simple demo use TagView">
+    <img src="/screenshots/preview.png" alt="a simple demo use TagView" width="405" height="720">
 </p>
 
 ## Setup and usage  
@@ -35,9 +35,7 @@ Add your `TagView` in layout xml or simply add it programmatically.
     TagView tagView = new TagView(context);
     theViewGroupYouWantToAddTagView.addView(tagView);
 ```
-As you get your `TagView`, set it up and add whatever tag you like.  
-All the number you set, like textSize, margin, padding, is a dp size.  
-You know, I'm lazzzzy, all this attributes cannot be set in xml yet.   
+As you get your `TagView`, set it up and add whatever tag you like. All the number you set, like textSize, margin, padding, is a dp size. You know, I'm lazzzzy, all this attributes cannot be set in xml yet.   
 ```Java
     tagView.textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
            .backgroundColor(Color.argb(0xff, 0x88, 0xff, 0xff))
@@ -51,9 +49,7 @@ You know, I'm lazzzzy, all this attributes cannot be set in xml yet.
            .padding(18);
 ```
 
-There are sevaral ways for you to add tags.  
-You can simply add `String` or `String` list  
-or add an entity called `Tag`, with tag string and color.
+There are sevaral ways for you to add tags. You can simply add `String` or `String` list or add an entity called `Tag`, with tag string and color.
 ```Java
     tagView.addStringTags(Arrays.asList("hello", "world"));
     tagView.addStringTag("hello");
