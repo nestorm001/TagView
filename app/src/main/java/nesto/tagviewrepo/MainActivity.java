@@ -42,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        tags.addStringTags(Arrays.asList("1", "hehe", "lalala", "23333"))
-                .addTag(new Tag("heheda", Color.argb(0xff, 0x88, 0xff, 0xff),
+        tags.addStringTags(Arrays.asList("hello", "world"))
+                .addTag(new Tag("apple", Color.argb(0xff, 0x88, 0xff, 0xff),
                         Color.argb(0xff, 0x77, 0x66, 0x55)))
-                .addTag(new Tag("dadahe", Color.argb(0xff, 0x00, 0x00, 0x00),
+                .addTag(new Tag("google", Color.argb(0xff, 0x00, 0x00, 0x00),
                         Color.argb(0xff, 0x77, 0x66, 0x55)))
-                .addTag(new Tag("hehshf", Color.argb(0xff, 0x11, 0x22, 0x33),
+                .addTag(new Tag("microsoft", Color.argb(0xff, 0x11, 0x22, 0x33),
                         Color.argb(0xff, 0xee, 0xaa, 0xcc)))
                 .backgroundColor(Color.argb(0xff, 0x88, 0xff, 0xff))
                 .textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
