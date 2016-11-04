@@ -19,7 +19,9 @@ import java.util.List;
  * By nesto
  */
 
-public class TagView extends FrameLayout implements OnTagClickListener {
+public class TagView extends FrameLayout
+        implements OnTagClickListener,
+        OnTagLongClickListener {
     private RecyclerView recyclerView;
     private List<Tag> tags;
     private TextPaint paint;
@@ -27,7 +29,8 @@ public class TagView extends FrameLayout implements OnTagClickListener {
     private TagAdapter adapter;
     private GridLayoutManager layoutManager;
     private int width;
-    private OnTagClickListener listener;
+    private OnTagClickListener clickListener;
+    private OnTagLongClickListener longClickListener;
 
     private static final int ADDITION_MARGIN = 2;
     private static final int ADDITION_PADDING = 16;
@@ -154,17 +157,23 @@ public class TagView extends FrameLayout implements OnTagClickListener {
     }
 
     public TagView setListener(OnTagClickListener listener) {
-        this.listener = listener;
-        adapter.setListener(listener);
+        this.clickListener = listener;
+        adapter.setClickListener(listener);
+        return this;
+    }
+
+    public TagView setListener(OnTagLongClickListener listener) {
+        this.longClickListener = listener;
+        adapter.setLongClickListener(listener);
         return this;
     }
 
     @Override public void tagClicked(String item) {
-        if (listener != null) listener.tagClicked(item);
+        if (clickListener != null) clickListener.tagClicked(item);
     }
 
     @Override public void tagLongClicked(String item) {
-        if (listener != null) listener.tagLongClicked(item);
+        if (longClickListener != null) longClickListener.tagLongClicked(item);
     }
 
     @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

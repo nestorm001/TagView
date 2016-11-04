@@ -23,7 +23,8 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
 
     private LayoutInflater inflater;
     private List<Tag> items;
-    private OnTagClickListener listener = null;
+    private OnTagClickListener clickListener = null;
+    private OnTagLongClickListener longClickListener = null;
     private Context context;
     private Integer defaultBackground;
     private Integer defaultTextColor;
@@ -40,8 +41,12 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
         inflater = LayoutInflater.from(context);
     }
 
-    void setListener(OnTagClickListener listener) {
-        this.listener = listener;
+    void setClickListener(OnTagClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    void setLongClickListener(OnTagLongClickListener longClickListener) {
+        this.longClickListener = longClickListener;
     }
 
     @Override public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,11 +61,11 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
         Tag tag = items.get(position);
         holder.textView.setText(tag.tag);
         holder.textView.setOnClickListener(v -> {
-            if (listener != null) listener.tagClicked(tag.tag);
+            if (clickListener != null) clickListener.tagClicked(tag.tag);
         });
 
         holder.textView.setOnLongClickListener(v -> {
-            if (listener != null) listener.tagLongClicked(tag.tag);
+            if (longClickListener != null) longClickListener.tagLongClicked(tag.tag);
             return true;
         });
 

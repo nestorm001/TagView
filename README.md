@@ -13,7 +13,7 @@ A custom view to show tags or similar staff, which moves item to the next line w
 ### Installation [ ![Download](https://api.bintray.com/packages/nestorm001/maven/tagview/images/download.svg) ](https://bintray.com/nestorm001/maven/tagview/_latestVersion)
 
 ```GRADLE
-compile 'cn.nesto:tagview:0.1.0'
+compile 'cn.nesto:tagview:0.1.1'
 ```
 
 Assuming you have installed jCenter provider:
@@ -38,15 +38,22 @@ Add your `TagView` in layout xml or simply add it programmatically.
 As you get your `TagView`, set it up and add whatever tag you like. All the number you set, like textSize, margin, padding, is a dp size. You know, I'm lazzzzy, all this attributes cannot be set in xml yet.   
 ```Java
     tagView.textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
-           .backgroundColor(Color.argb(0xff, 0x88, 0xff, 0xff))
-           .textSize(14)
+           .backgroundColor(Color.argb(0xff, 0x7f, 0x7f, 0x7f))
            .setListener(new OnTagClickListener() {
-                @Override public void tagClicked(String item) {
-                    // do whatever you like
-                }
+               @Override public void tagClicked(String item) {
+                   // do whatever you like
+               }
            })
+           .setListener(new OnTagLongClickListener() {
+               @Override public void tagLongClicked(String item) {
+                   // do whatever you like
+               }
+           })
+           .textSize(10)
            .margin(2)
-           .padding(18);
+           .padding(16)
+           .corner(5)
+           .itemHeight(30);
 ```
 
 There are sevaral ways for you to add tags. You can simply add `String` or `String` list or add an entity called `Tag`, with tag string and color.
@@ -62,8 +69,9 @@ There are sevaral ways for you to add tags. You can simply add `String` or `Stri
 ## TODOs
 
 * Add TagView attributes in xml, e.g. item margin, item max padding, colors.
-* Add a method to set item corner radius.
+* ~~Add a method to set item corner radius.~~
 * Drag tag.
+* Set the max width of item, e.g. half of the view.
 
 ## License [![license for TagView](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png)](#)
 ```

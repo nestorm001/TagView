@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -15,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import nesto.tagview.OnTagClickListener;
+import nesto.tagview.OnTagLongClickListener;
 import nesto.tagview.Tag;
 import nesto.tagview.TagView;
 
@@ -54,16 +54,17 @@ public class MainActivity extends AppCompatActivity {
                         Color.argb(0xff, 0xee, 0xaa, 0xcc)))
                 .backgroundColor(Color.argb(0xff, 0x7f, 0x7f, 0x7f))
                 .textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
-                .textSize(10)
                 .setListener(new OnTagClickListener() {
                     @Override public void tagClicked(String item) {
-                        Log.d("wtf", item);
-                    }
-
-                    @Override public void tagLongClicked(String item) {
-                        Log.d("wtf", item);
+                        // do whatever you like
                     }
                 })
+                .setListener(new OnTagLongClickListener() {
+                    @Override public void tagLongClicked(String item) {
+                        // do whatever you like
+                    }
+                })
+                .textSize(10)
                 .margin(2)
                 .padding(16)
                 .corner(5)
