@@ -75,7 +75,7 @@ There are several ways for you to add tags. You can simply add `String` or `Stri
 * Drag tag.
 * Set the max width of item, e.g. half of the view.
 
-## License [![license for TagView](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png)](#)
+## License [![license for TagView](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png)](http://www.wtfpl.net)
 ```
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                     Version 2, December 2004
