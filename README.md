@@ -1,5 +1,7 @@
 # TagView  
 
+<a href="http://www.methodscount.com/?lib=cn.nesto%3Atagview%3A0.1.1"><img src="https://img.shields.io/badge/Methods and size-core: 118 | deps: 18818 | 26 KB-e91e63.svg"/></a>
+
 A custom view to show tags or similar staff, which moves item to the next line when no space left on the current.
 
 ## Preview
