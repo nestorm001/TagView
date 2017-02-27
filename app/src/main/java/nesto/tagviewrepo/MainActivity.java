@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 .padding(16)
                 .corner(5)
                 .itemHeight(30)
+                .dividerHeight(8)
         ;
         setWatcher();
     }

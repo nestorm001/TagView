@@ -2,6 +2,7 @@ package nesto.tagview;
 
 import android.content.Context;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IntRange;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -102,6 +103,11 @@ public class TagView extends FrameLayout
         return this;
     }
 
+    public TagView backgroundDrawable(@DrawableRes int drawable) {
+        adapter.setBackgroundDrawable(drawable);
+        return this;
+    }
+
     public TagView padding(@IntRange(from = 0) int padding) {
         this.padding = Math.max(padding, 8);
         additionTotal = calculateAddition();
@@ -127,6 +133,11 @@ public class TagView extends FrameLayout
         adapter.setRadius(DpTrans.dp2px(context, radius));
         return this;
     }
+    public TagView dividerHeight(@IntRange(from = 0) int height) {
+        adapter.setDivider(DpTrans.dp2px(context, height));
+        return this;
+    }
+    
 
     public TagView addStringTags(Collection<String> tagCollection) {
         int start = tags.size();

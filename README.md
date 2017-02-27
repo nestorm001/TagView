@@ -55,7 +55,8 @@ As you get your `TagView`, set it up and add whatever tag you like. All the numb
            .margin(2)
            .padding(16)
            .corner(5)
-           .itemHeight(30);
+           .itemHeight(30)
+           .dividerHeight(8);
 ```
 
 There are several ways for you to add tags. You can simply add `String` or `String` list or add an entity called `Tag`, with tag string and color.

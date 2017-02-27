@@ -30,10 +30,12 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
     private Integer defaultTextColor;
     private Integer textSize;
     private Integer margin;
+    private Integer divider;
     private Integer paddingLeft;
     private Integer paddingRight;
     private Integer height;
     private Integer radius;
+    private Integer backgroundDrawable;
 
     TagAdapter(Context context, List<Tag> items) {
         this.context = context;
@@ -93,6 +95,10 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
             params.leftMargin = margin;
             params.rightMargin = margin;
         }
+        if (divider != null) {
+            params.topMargin = divider / 2;
+            params.bottomMargin = divider / 2;
+        }
         if (height != null) {
             params.height = height;
         }
@@ -104,6 +110,11 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
 
     void setBackground(int color) {
         defaultBackground = color;
+        notifyDataSetChanged();
+    }
+
+    void setBackgroundDrawable(int backgroundDrawable) {
+        this.backgroundDrawable = backgroundDrawable;
         notifyDataSetChanged();
     }
 
@@ -148,6 +159,10 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
     void setRadius(int radius) {
         this.radius = radius;
         notifyDataSetChanged();
+    }
+
+    public void setDivider(int divider) {
+        this.divider = divider;
     }
 
     class Holder extends RecyclerView.ViewHolder {
