@@ -15,7 +15,7 @@ A custom view to show tags or similar staff, which moves item to the next line w
 ### Installation [ ![Download](https://api.bintray.com/packages/nestorm001/maven/tagview/images/download.svg) ](https://bintray.com/nestorm001/maven/tagview/_latestVersion)
 
 ```GRADLE
-compile 'cn.nesto:tagview:0.1.1'
+compile 'cn.nesto:tagview:0.1.2'
 ```
 
 Assuming you have installed jCenter provider:
