@@ -53,15 +53,11 @@ public class MainActivity extends AppCompatActivity {
                         Color.argb(0xff, 0xee, 0xaa, 0xcc)))
                 .backgroundColor(Color.argb(0xff, 0x7f, 0x7f, 0x7f))
                 .textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
-                .setListener(new OnTagClickListener() {
-                    @Override public void tagClicked(String item) {
-                        // do whatever you like
-                    }
+                .setListener((OnTagClickListener) item -> {
+                    // do whatever you like
                 })
-                .setListener(new OnTagLongClickListener() {
-                    @Override public void tagLongClicked(String item) {
-                        // do whatever you like
-                    }
+                .setListener((OnTagLongClickListener) item -> {
+                    // do whatever you like
                 })
                 .textSize(12)
                 .margin(2)
