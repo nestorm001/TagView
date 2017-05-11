@@ -36,7 +36,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/background_r"
+                android:id="@+id/backgroundR"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -45,7 +45,7 @@
                 android:text="0"/>
 
             <EditText
-                android:id="@+id/background_g"
+                android:id="@+id/backgroundG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -54,7 +54,7 @@
                 android:text="0"/>
 
             <EditText
-                android:id="@+id/background_b"
+                android:id="@+id/backgroundB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -63,7 +63,7 @@
                 android:text="0"/>
 
             <View
-                android:id="@+id/background_color"
+                android:id="@+id/backgroundColor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
@@ -82,7 +82,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/text_r"
+                android:id="@+id/textR"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -91,7 +91,7 @@
                 android:text="255"/>
 
             <EditText
-                android:id="@+id/text_g"
+                android:id="@+id/textG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -100,7 +100,7 @@
                 android:text="255"/>
 
             <EditText
-                android:id="@+id/text_b"
+                android:id="@+id/textB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -109,7 +109,7 @@
                 android:text="255"/>
 
             <View
-                android:id="@+id/text_color"
+                android:id="@+id/textColor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
@@ -130,6 +130,7 @@
 
     <Button
         android:id="@+id/add"
+        android:onClick="add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
