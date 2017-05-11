@@ -1,6 +1,6 @@
 # TagView  
 
-<a href="http://www.methodscount.com/?lib=cn.nesto%3Atagview%3A0.3.0"><img src="https://img.shields.io/badge/Methods and size-core: 118 | deps: 18818 | 26 KB-e91e63.svg"/></a>
+<a href="http://www.methodscount.com/?lib=cn.nesto%3Atagview%3A0.3.1"><img src="https://img.shields.io/badge/Methods and size-core: 118 | deps: 18818 | 26 KB-e91e63.svg"/></a>
 
 A custom view to show tags or similar staff, which moves item to the next line when no space left on the current.
 
@@ -15,7 +15,7 @@ A custom view to show tags or similar staff, which moves item to the next line w
 ### Installation [ ![Download](https://api.bintray.com/packages/nestorm001/maven/tagview/images/download.svg) ](https://bintray.com/nestorm001/maven/tagview/_latestVersion)
 
 ```GRADLE
-compile 'cn.nesto:tagview:0.3.0'
+compile 'cn.nesto:tagview:0.3.1'
 ```
 
 Assuming you have installed jCenter provider:
@@ -41,15 +41,11 @@ As you get your `TagView`, set it up and add whatever tag you like. All the numb
 ```Java
     tagView.textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
            .backgroundColor(Color.argb(0xff, 0x7f, 0x7f, 0x7f))
-           .setListener(new OnTagClickListener() {
-               @Override public void tagClicked(String item) {
-                   // do whatever you like
-               }
+           .setListener((OnTagClickListener) item -> {
+               // do whatever you like
            })
-           .setListener(new OnTagLongClickListener() {
-               @Override public void tagLongClicked(String item) {
-                   // do whatever you like
-               }
+           .setListener((OnTagLongClickListener) item -> {
+               // do whatever you like
            })
            .textSize(10)
            .margin(2)
