@@ -162,13 +162,25 @@ class TagView : FrameLayout, OnTagClickListener, OnTagLongClickListener {
         return this
     }
 
+    @Deprecated("use 'setOnTagClickListener' for replace",
+            ReplaceWith("setOnTagClickListener(listener)"))
     fun setListener(listener: OnTagClickListener): TagView {
+        return setOnTagClickListener(listener)
+    }
+
+    fun setOnTagClickListener(listener: OnTagClickListener): TagView {
         clickListener = listener
         adapter.setClickListener(listener)
         return this
     }
 
+    @Deprecated("use 'setOnTagLongClickListener' for replace",
+            ReplaceWith("setOnTagLongClickListener(listener)"))
     fun setListener(listener: OnTagLongClickListener): TagView {
+        return setOnTagLongClickListener(listener)
+    }
+
+    fun setOnTagLongClickListener(listener: OnTagLongClickListener): TagView {
         longClickListener = listener
         adapter.setLongClickListener(listener)
         return this

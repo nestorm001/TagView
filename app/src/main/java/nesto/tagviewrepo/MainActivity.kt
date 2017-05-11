@@ -37,12 +37,16 @@ class MainActivity : AppCompatActivity() {
                         Color.argb(0xff, 0xee, 0xaa, 0xcc)))
                 .backgroundColor(Color.argb(0xff, 0x7f, 0x7f, 0x7f))
                 .textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
-                .setListener({
-                    // do whatever you like
-                } as OnTagClickListener)
-                .setListener({
-                    // do whatever you like
-                } as OnTagLongClickListener)
+                .setOnTagClickListener(object : OnTagClickListener {
+                    override fun tagClicked(item: String) {
+                        // do whatever you like
+                    }
+                })
+                .setOnTagLongClickListener(object : OnTagLongClickListener {
+                    override fun tagLongClicked(item: String) {
+                        // do whatever you like
+                    }
+                })
                 .textSize(12)
                 .margin(2)
                 .padding(16)
