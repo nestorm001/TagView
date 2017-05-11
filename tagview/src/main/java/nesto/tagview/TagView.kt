@@ -31,8 +31,8 @@ class TagView : FrameLayout, OnTagClickListener, OnTagLongClickListener {
     private lateinit var adapter: TagAdapter
     private lateinit var layoutManager: GridLayoutManager
     private var spanWidth: Int = 0
-    private var clickListener: OnTagClickListener? = null
-    private var longClickListener: OnTagLongClickListener? = null
+    private var clickListener: ((String) -> Unit)? = null
+    private var longClickListener: ((String) -> Unit)? = null
     private var padding = ADDITION_PADDING
     private var margin = ADDITION_MARGIN
     // 2 * margin + 2 * padding
@@ -162,36 +162,24 @@ class TagView : FrameLayout, OnTagClickListener, OnTagLongClickListener {
         return this
     }
 
-    @Deprecated("use 'setOnTagClickListener' for replace",
-            ReplaceWith("setOnTagClickListener(listener)"))
-    fun setListener(listener: OnTagClickListener): TagView {
-        return setOnTagClickListener(listener)
-    }
-
-    fun setOnTagClickListener(listener: OnTagClickListener): TagView {
+    fun setOnTagClickListener(listener: (String) -> Unit): TagView {
         clickListener = listener
         adapter.setClickListener(listener)
         return this
     }
 
-    @Deprecated("use 'setOnTagLongClickListener' for replace",
-            ReplaceWith("setOnTagLongClickListener(listener)"))
-    fun setListener(listener: OnTagLongClickListener): TagView {
-        return setOnTagLongClickListener(listener)
-    }
-
-    fun setOnTagLongClickListener(listener: OnTagLongClickListener): TagView {
+    fun setOnTagLongClickListener(listener: (String) -> Unit): TagView {
         longClickListener = listener
         adapter.setLongClickListener(listener)
         return this
     }
 
     override fun tagClicked(item: String) {
-        clickListener?.tagClicked(item)
+        clickListener?.invoke(item)
     }
 
     override fun tagLongClicked(item: String) {
-        longClickListener?.tagLongClicked(item)
+        longClickListener?.invoke(item)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

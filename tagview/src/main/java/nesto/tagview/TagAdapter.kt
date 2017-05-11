@@ -19,8 +19,8 @@ import android.widget.TextView
 
 internal class TagAdapter(private val context: Context, private val items: List<Tag>) : RecyclerView.Adapter<TagAdapter.Holder>() {
 
-    private var clickListener: OnTagClickListener? = null
-    private var longClickListener: OnTagLongClickListener? = null
+    private var clickListener: ((String) -> Unit)? = null
+    private var longClickListener: ((String) -> Unit)? = null
     private var defaultBackground: Int? = null
     private var defaultTextColor: Int? = null
     private var textSize: Int? = null
@@ -32,11 +32,11 @@ internal class TagAdapter(private val context: Context, private val items: List<
     private var radius: Int? = null
     private var backgroundDrawable: Int? = null
 
-    fun setClickListener(clickListener: OnTagClickListener) {
+    fun setClickListener(clickListener: (String) -> Unit) {
         this.clickListener = clickListener
     }
 
-    fun setLongClickListener(longClickListener: OnTagLongClickListener) {
+    fun setLongClickListener(longClickListener: (String) -> Unit) {
         this.longClickListener = longClickListener
     }
 
@@ -47,13 +47,14 @@ internal class TagAdapter(private val context: Context, private val items: List<
         return holder
     }
 
+    @Suppress("DEPRECATION")
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val tag = items[position]
         holder.textView.text = tag.tag
-        holder.textView.setOnClickListener { _ -> clickListener?.tagClicked(tag.tag) }
+        holder.textView.setOnClickListener { clickListener?.invoke(tag.tag) }
 
         holder.textView.setOnLongClickListener { _ ->
-            longClickListener?.tagLongClicked(tag.tag)
+            longClickListener?.invoke(tag.tag)
             true
         }
 
@@ -120,6 +121,7 @@ internal class TagAdapter(private val context: Context, private val items: List<
         notifyDataSetChanged()
     }
 
+    @Suppress("DEPRECATION")
     private fun getBackground(@ColorInt color: Int): Drawable {
         val drawable = context.resources
                 .getDrawable(R.drawable.corner_gray_lighter) as GradientDrawable
@@ -149,6 +151,6 @@ internal class TagAdapter(private val context: Context, private val items: List<
 
     internal inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var textView: TextView
-        
+
     }
 }

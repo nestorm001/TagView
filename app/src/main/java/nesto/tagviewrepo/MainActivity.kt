@@ -8,8 +8,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_main.*
-import nesto.tagview.OnTagClickListener
-import nesto.tagview.OnTagLongClickListener
 import nesto.tagview.Tag
 import java.util.*
 
@@ -37,16 +35,8 @@ class MainActivity : AppCompatActivity() {
                         Color.argb(0xff, 0xee, 0xaa, 0xcc)))
                 .backgroundColor(Color.argb(0xff, 0x7f, 0x7f, 0x7f))
                 .textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
-                .setOnTagClickListener(object : OnTagClickListener {
-                    override fun tagClicked(item: String) {
-                        // do whatever you like
-                    }
-                })
-                .setOnTagLongClickListener(object : OnTagLongClickListener {
-                    override fun tagLongClicked(item: String) {
-                        // do whatever you like
-                    }
-                })
+                .setOnTagClickListener { /*do whatever you want*/ }
+                .setOnTagLongClickListener { /*do whatever you want*/ }
                 .textSize(12)
                 .margin(2)
                 .padding(16)
