@@ -16,7 +16,7 @@ import android.widget.FrameLayout
  * By nesto
  */
 
-class TagView : FrameLayout, OnTagClickListener, OnTagLongClickListener {
+class TagView : FrameLayout {
 
     companion object {
         private val ADDITION_MARGIN = 2
@@ -172,14 +172,6 @@ class TagView : FrameLayout, OnTagClickListener, OnTagLongClickListener {
         longClickListener = listener
         adapter.setLongClickListener(listener)
         return this
-    }
-
-    override fun tagClicked(item: String) {
-        clickListener?.invoke(item)
-    }
-
-    override fun tagLongClicked(item: String) {
-        longClickListener?.invoke(item)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
