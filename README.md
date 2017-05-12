@@ -33,36 +33,41 @@ or just import `TagView` to your project.
 
 Add your `TagView` in layout xml or simply add it programmatically.
 
-```Java
-    TagView tagView = new TagView(context);
-    theViewGroupYouWantToAddTagView.addView(tagView);
+```Kotlin
+    val tagView = TagView(context)
+    theViewGroupYouWantToAddTagView.addView(tagView)
 ```
 As you get your `TagView`, set it up and add whatever tag you like. All the number you set, like textSize, margin, padding, is a dp size. All these settings are optional. You know, I'm lazzzzy, all this attributes cannot be set in xml yet.   
-```Java
-    tagView.textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
+```Kotlin
+    tagView.addStringTag("fffffffffffffffffffffffffff")
+           .addStringTag("ooooooooooooooooooooooooooo")
+           .addStringTags(Arrays.asList("hello", "world"))
+           .addTag(Tag("apple", Color.argb(0xff, 0x88, 0xff, 0xff),
+                   Color.argb(0xff, 0x77, 0x66, 0x55)))
+           .addTag(Tag("google", Color.argb(0xff, 0x00, 0x00, 0x00),
+                   Color.argb(0xff, 0x77, 0x66, 0x55)))
+           .addTag(Tag("microsoft", Color.argb(0xff, 0x11, 0x22, 0x33),
+                   Color.argb(0xff, 0xee, 0xaa, 0xcc)))
            .backgroundColor(Color.argb(0xff, 0x7f, 0x7f, 0x7f))
-           .setListener((OnTagClickListener) item -> {
-               // do whatever you like
-           })
-           .setListener((OnTagLongClickListener) item -> {
-               // do whatever you like
-           })
-           .textSize(10)
+           .textColor(Color.argb(0xff, 0xff, 0xff, 0xff))
+           .setOnTagClickListener { /*do whatever you want*/ }
+           .setOnTagLongClickListener { /*do whatever you want*/ }
+           .textSize(12)
            .margin(2)
            .padding(16)
            .corner(5)
            .itemHeight(30)
-           .dividerHeight(8);
+           .dividerHeight(8)
 ```
 
 There are several ways for you to add tags. You can simply add `String` or `String` list or add an entity called `Tag`, with tag string and color.
-```Java
-    tagView.addStringTags(Arrays.asList("hello", "world"));
-    tagView.addStringTag("hello");
-    tagView.addTags(Arrays.asList(new Tag("hello"), 
-                                  new Tag("world", 0xffffff, 0x000000), 
-                                  new Tag("sample", null, 0x123456)));
-    tagView.addTag(new Tag("hello", 0x654321, null));
+```Kotlin
+    tagView.addStringTags(listOf("hello", "world"))
+    tagView.addStringTag("hello")
+    tagView.addTags(listOf(Tag("hello"), 
+                                  Tag("world", 0xffffff, 0x000000), 
+                                  Tag("sample", null, 0x123456)))
+    tagView.addTag(Tag("hello", 0x654321, null))
 ```
 
 ## TODOs
