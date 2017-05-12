@@ -4,6 +4,11 @@
 
 A custom view to show tags or similar staff, which moves item to the next line when no space left on the current.
 
+From v0.3.0 this library is converted to Kotlin, the last Java version is v0.2.0, you can get it by
+```GRADLE
+compile 'cn.nesto:tagview:0.2.0'
+```
+
 ## Preview
 
 <p align="center">
