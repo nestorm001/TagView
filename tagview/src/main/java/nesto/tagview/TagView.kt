@@ -147,7 +147,7 @@ class TagView : FrameLayout {
         } else {
             tags.add(position, Tag(tag, null, null))
         }
-        adapter.notifyItemInserted(tags.size - 1)
+        adapter.notifyItemInserted(position ?: tags.size - 1)
         return this
     }
 
@@ -164,7 +164,7 @@ class TagView : FrameLayout {
         } else {
             tags.add(position, tag)
         }
-        adapter.notifyItemInserted(tags.size - 1)
+        adapter.notifyItemInserted(position ?: tags.size - 1)
         return this
     }
 
