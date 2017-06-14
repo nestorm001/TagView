@@ -5,11 +5,11 @@ import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.IntRange
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import kotlinx.android.synthetic.main.tag_view.view.*
 
 /**
  * Created on 2016/11/3.
@@ -25,7 +25,6 @@ class TagView : FrameLayout {
         private val DEFAULT_TEXT_SIZE = 12
     }
 
-    private lateinit var recyclerView: RecyclerView
     private lateinit var tags: MutableList<Tag>
     private lateinit var paint: TextPaint
     private lateinit var adapter: TagAdapter
@@ -52,7 +51,6 @@ class TagView : FrameLayout {
         val view = View.inflate(context, R.layout.tag_view, null)
         addView(view)
         layoutManager = GridLayoutManager(context, 1)
-        recyclerView = view.findViewById(R.id.recyclerView) as RecyclerView
         tags = mutableListOf<Tag>()
         adapter = TagAdapter(context, tags)
         recyclerView.adapter = adapter
