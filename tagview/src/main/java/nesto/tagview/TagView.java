@@ -11,8 +11,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -59,7 +59,7 @@ public class TagView extends FrameLayout
         addView(view);
         layoutManager = new GridLayoutManager(context, 1);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        tags = new ArrayList<>();
+        tags = new LinkedList<>();
         adapter = new TagAdapter(context, tags);
         recyclerView.setAdapter(adapter);
         additionTotal = calculateAddition();
@@ -155,6 +155,12 @@ public class TagView extends FrameLayout
         return this;
     }
 
+    public TagView addStringTag(String tag, int position) {
+        tags.add(position, new Tag(tag, null, null));
+        adapter.notifyItemInserted(position);
+        return this;
+    }
+
     public TagView addTags(Collection<Tag> tagCollection) {
         int start = tags.size();
         tags.addAll(tagCollection);
@@ -165,6 +171,12 @@ public class TagView extends FrameLayout
     public TagView addTag(Tag tag) {
         tags.add(tag);
         adapter.notifyItemInserted(tags.size() - 1);
+        return this;
+    }
+
+    public TagView addTag(Tag tag, int position) {
+        tags.add(position, tag);
+        adapter.notifyItemInserted(position);
         return this;
     }
 
