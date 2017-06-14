@@ -19,8 +19,8 @@ import android.widget.TextView
 
 internal class TagAdapter(private val context: Context, private val items: List<Tag>) : RecyclerView.Adapter<TagAdapter.Holder>() {
 
-    private var clickListener: ((String) -> Unit)? = null
-    private var longClickListener: ((String) -> Unit)? = null
+    private var clickListener: ((Int, String) -> Unit)? = null
+    private var longClickListener: ((Int, String) -> Unit)? = null
     private var defaultBackground: Int? = null
     private var defaultTextColor: Int? = null
     private var textSize: Int? = null
@@ -32,11 +32,11 @@ internal class TagAdapter(private val context: Context, private val items: List<
     private var radius: Int? = null
     private var backgroundDrawable: Int? = null
 
-    fun setClickListener(clickListener: (String) -> Unit) {
+    fun setClickListener(clickListener: (Int, String) -> Unit) {
         this.clickListener = clickListener
     }
 
-    fun setLongClickListener(longClickListener: (String) -> Unit) {
+    fun setLongClickListener(longClickListener: (Int, String) -> Unit) {
         this.longClickListener = longClickListener
     }
 
@@ -51,10 +51,10 @@ internal class TagAdapter(private val context: Context, private val items: List<
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val tag = items[position]
         holder.textView.text = tag.tag
-        holder.textView.setOnClickListener { clickListener?.invoke(tag.tag) }
+        holder.textView.setOnClickListener { clickListener?.invoke(position, tag.tag) }
 
         holder.textView.setOnLongClickListener { _ ->
-            longClickListener?.invoke(tag.tag)
+            longClickListener?.invoke(position, tag.tag)
             true
         }
 
@@ -151,6 +151,5 @@ internal class TagAdapter(private val context: Context, private val items: List<
 
     internal inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var textView: TextView
-
     }
 }

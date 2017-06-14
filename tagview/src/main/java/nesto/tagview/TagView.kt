@@ -30,8 +30,8 @@ class TagView : FrameLayout {
     private lateinit var adapter: TagAdapter
     private lateinit var layoutManager: GridLayoutManager
     private var spanWidth: Int = 0
-    private var clickListener: ((String) -> Unit)? = null
-    private var longClickListener: ((String) -> Unit)? = null
+    private var clickListener: ((Int, String) -> Unit)? = null
+    private var longClickListener: ((Int, String) -> Unit)? = null
     private var padding = ADDITION_PADDING
     private var margin = ADDITION_MARGIN
     // 2 * margin + 2 * padding
@@ -141,8 +141,12 @@ class TagView : FrameLayout {
         return this
     }
 
-    fun addStringTag(tag: String): TagView {
-        tags.add(Tag(tag, null, null))
+    fun addStringTag(tag: String, position: Int? = null): TagView {
+        if (position == null) {
+            tags.add(Tag(tag, null, null))
+        } else {
+            tags.add(position, Tag(tag, null, null))
+        }
         adapter.notifyItemInserted(tags.size - 1)
         return this
     }
@@ -154,19 +158,23 @@ class TagView : FrameLayout {
         return this
     }
 
-    fun addTag(tag: Tag): TagView {
-        tags.add(tag)
+    fun addTag(tag: Tag, position: Int? = null): TagView {
+        if (position == null) {
+            tags.add(tag)
+        } else {
+            tags.add(position, tag)
+        }
         adapter.notifyItemInserted(tags.size - 1)
         return this
     }
 
-    fun setOnTagClickListener(listener: (String) -> Unit): TagView {
+    fun setOnTagClickListener(listener: (Int, String) -> Unit): TagView {
         clickListener = listener
         adapter.setClickListener(listener)
         return this
     }
 
-    fun setOnTagLongClickListener(listener: (String) -> Unit): TagView {
+    fun setOnTagLongClickListener(listener: (Int, String) -> Unit): TagView {
         longClickListener = listener
         adapter.setLongClickListener(listener)
         return this
@@ -181,5 +189,18 @@ class TagView : FrameLayout {
         layoutManager.spanCount = spanWidth
         setTagSize()
         recyclerView.layoutManager = layoutManager
+    }
+
+    fun removeAllTags(): TagView {
+        val count = tags.size
+        tags.clear()
+        adapter.notifyItemRangeRemoved(0, count)
+        return this
+    }
+
+    fun removeTag(position: Int): TagView {
+        tags.removeAt(position)
+        adapter.notifyItemRemoved(position)
+        return this
     }
 }
