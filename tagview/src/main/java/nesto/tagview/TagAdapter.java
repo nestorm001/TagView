@@ -63,11 +63,11 @@ class TagAdapter extends RecyclerView.Adapter<TagAdapter.Holder> {
         Tag tag = items.get(position);
         holder.textView.setText(tag.tag);
         holder.textView.setOnClickListener(v -> {
-            if (clickListener != null) clickListener.tagClicked(tag.tag);
+            if (clickListener != null) clickListener.tagClicked(position, tag.tag);
         });
 
         holder.textView.setOnLongClickListener(v -> {
-            if (longClickListener != null) longClickListener.tagLongClicked(tag.tag);
+            if (longClickListener != null) longClickListener.tagLongClicked(position, tag.tag);
             return true;
         });
 

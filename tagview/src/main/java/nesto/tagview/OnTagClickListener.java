@@ -6,5 +6,5 @@ package nesto.tagview;
  */
 
 public interface OnTagClickListener {
-    void tagClicked(String item);
+    void tagClicked(int position, String item);
 }

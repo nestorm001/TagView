@@ -133,11 +133,12 @@ public class TagView extends FrameLayout
         adapter.setRadius(DpTrans.dp2px(context, radius));
         return this;
     }
+
     public TagView dividerHeight(@IntRange(from = 0) int height) {
         adapter.setDivider(DpTrans.dp2px(context, height));
         return this;
     }
-    
+
 
     public TagView addStringTags(Collection<String> tagCollection) {
         int start = tags.size();
@@ -179,12 +180,12 @@ public class TagView extends FrameLayout
         return this;
     }
 
-    @Override public void tagClicked(String item) {
-        if (clickListener != null) clickListener.tagClicked(item);
+    @Override public void tagClicked(int position, String item) {
+        if (clickListener != null) clickListener.tagClicked(position, item);
     }
 
-    @Override public void tagLongClicked(String item) {
-        if (longClickListener != null) longClickListener.tagLongClicked(item);
+    @Override public void tagLongClicked(int position, String item) {
+        if (longClickListener != null) longClickListener.tagLongClicked(position, item);
     }
 
     @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -196,5 +197,18 @@ public class TagView extends FrameLayout
         layoutManager.setSpanCount(width);
         setTagSize();
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    public TagView removeAllTags() {
+        int count = tags.size();
+        tags.clear();
+        adapter.notifyItemRangeRemoved(0, count);
+        return this;
+    }
+
+    public TagView removeTag(int position) {
+        tags.remove(position);
+        adapter.notifyItemRemoved(position);
+        return this;
     }
 }
